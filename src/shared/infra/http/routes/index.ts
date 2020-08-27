@@ -13,7 +13,7 @@ routes.use('/profile', profileRouter);
 
 routes.get('/heloisa', (req, res) => {
   return res.json({
-    msg: '@Digite seu nome completo + frase',
+    msg: '@heloisagabrielavieira + Unicornio cintilante',
   });
 });
 
