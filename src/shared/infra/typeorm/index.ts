@@ -1,5 +1,5 @@
 import { createConnection } from 'typeorm';
 
 createConnection().then(() => {
-  console.log('🎯 Database Started');
+  console.log('🌏 Database Started');
 });
