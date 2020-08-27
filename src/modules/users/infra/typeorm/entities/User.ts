@@ -21,6 +21,9 @@ class User {
   approved: boolean;
 
   @Column()
+  admin: boolean;
+
+  @Column()
   password: string;
 
   @Column()

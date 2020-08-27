@@ -11,4 +11,27 @@ routes.use('/sessions', sessionsRouter);
 routes.use('/password', passwordRoutter);
 routes.use('/profile', profileRouter);
 
+routes.get('/heloisa', (req, res) => {
+  return res.json({
+    msg: '@Digite seu nome completo + frase',
+  });
+});
+
+routes.get('/pedro', (req, res) => {
+  return res.json({
+    msg: '@Digite seu nome completo + frase',
+  });
+});
+
+routes.get('/julia', (req, res) => {
+  return res.json({
+    msg: '@Digite seu nome completo + frase',
+  });
+});
+
+routes.get('/felipe', (req, res) => {
+  return res.json({
+    msg: '@Digite seu nome completo + frase',
+  });
+});
 export default routes;

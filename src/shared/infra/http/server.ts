@@ -1,4 +1,7 @@
 import 'reflect-metadata';
+import 'dotenv/config';
+
+import morgan from 'morgan';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
@@ -13,7 +16,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(morgan('dev'));
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
 
