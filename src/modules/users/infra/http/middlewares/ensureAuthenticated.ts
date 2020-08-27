@@ -7,6 +7,7 @@ interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
+  approved: boolean;
 }
 export default function ensureAuthenticated(
   req: Request,
@@ -21,11 +22,15 @@ export default function ensureAuthenticated(
   // Bearer / Token
   const [, token] = authHeader.split(' ');
 
+  const decoded = verify(token, authConfig.jwt.secret);
+
+  const { sub, approved } = decoded as ITokenPayload;
+
+  if (!approved) {
+    throw new AppError('You have no permission to acess the sistem', 401);
+  }
+
   try {
-    const decoded = verify(token, authConfig.jwt.secret);
-
-    const { sub } = decoded as ITokenPayload;
-
     req.user = {
       id: sub,
     };

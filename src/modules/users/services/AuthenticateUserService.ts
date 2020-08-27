@@ -27,7 +27,7 @@ class AuthenticateUserService {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('email/password combination does not match', 401);
+      throw new AppError('Incorrect emai/password combination', 401);
     }
 
     const passwordMatched = await this.hashProvider.compareHash(
@@ -36,15 +36,21 @@ class AuthenticateUserService {
     );
 
     if (!passwordMatched) {
-      throw new AppError('email/password combination does not match', 401);
+      throw new AppError('Incorrect emai/password combination', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
 
-    const token = sign({}, secret, {
-      subject: user.id,
-      expiresIn,
-    });
+    const token = sign(
+      {
+        approved: user.approved,
+      },
+      secret,
+      {
+        subject: user.id,
+        expiresIn,
+      },
+    );
 
     return {
       user,

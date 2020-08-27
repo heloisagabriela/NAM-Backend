@@ -18,6 +18,9 @@ class User {
   email: string;
 
   @Column()
+  approved: boolean;
+
+  @Column()
   password: string;
 
   @Column()
