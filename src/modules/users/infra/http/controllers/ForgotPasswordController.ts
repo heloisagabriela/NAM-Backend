@@ -13,7 +13,6 @@ export default class ForgotPasswordController {
     await sendForgotPasswordEmailService.execute({
       email,
     });
-    console.log('Chgou qui');
 
     return response.status(204).send();
   }
