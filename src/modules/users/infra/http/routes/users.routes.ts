@@ -1,23 +1,22 @@
 import { Router } from 'express';
-import multer from 'multer';
-
-import uploadConfig from '@config/upload';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import { celebrate, Segments, Joi } from 'celebrate';
 import UsersController from '../controllers/UsersController';
-import UserAvatarController from '../controllers/UserAvatarController';
 
 const usersController = new UsersController();
-const usersAvatarController = new UserAvatarController();
 const usersRouter = Router();
-const upload = multer(uploadConfig);
 
-usersRouter.post('/', usersController.create);
-
-usersRouter.patch(
-  '/avatar',
-  ensureAuthenticated,
-  upload.single('avatar'),
-  usersAvatarController.update,
+usersRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      username: Joi.string().required(),
+      password: Joi.string().min(6).required(),
+      registerType: Joi.number().required(),
+    },
+  }),
+  usersController.create,
 );
 
 export default usersRouter;

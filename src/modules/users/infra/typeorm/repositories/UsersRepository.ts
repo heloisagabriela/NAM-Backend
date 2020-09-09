@@ -4,10 +4,6 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import User from '../entities/User';
 
-/*
- * Para usar as funções disponibilizadas pelo TypeORM a classe tem que extender Repository:
- * extends Repository<Appointment>
- */
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;
 

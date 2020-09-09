@@ -14,7 +14,7 @@ export default class CreateUsers1587762844474 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
+            name: 'nome',
             type: 'varchar',
           },
           {
@@ -23,17 +23,17 @@ export default class CreateUsers1587762844474 implements MigrationInterface {
             isUnique: true,
           },
           {
-            name: 'password',
-            type: 'varchar',
+            name: 'tipo',
+            type: 'smallint',
           },
           {
-            name: 'approved',
-            type: 'boolean',
+            name: 'nomeUsuario',
+            type: 'varchar',
             default: false,
           },
           {
-            name: 'admin',
-            type: 'boolean',
+            name: 'senha',
+            type: 'varchar',
             default: false,
           },
           {
@@ -42,7 +42,7 @@ export default class CreateUsers1587762844474 implements MigrationInterface {
             default: 'now()',
           },
           {
-            name: 'update_at',
+            name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
           },

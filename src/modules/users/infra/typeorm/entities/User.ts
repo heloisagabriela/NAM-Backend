@@ -11,28 +11,25 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ name: 'nome' })
   name: string;
 
-  @Column()
+  @Column({ name: 'email' })
   email: string;
 
-  @Column()
-  approved: boolean;
+  @Column({ name: 'tipo' })
+  registerType: number;
 
-  @Column()
-  admin: boolean;
+  @Column({ name: 'nomeUsuario' })
+  username: string;
 
-  @Column()
+  @Column({ name: 'senha' })
   password: string;
-
-  @Column()
-  avatar: string;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
-  update_at: Date;
+  updated_at: Date;
 }
 export default User;
