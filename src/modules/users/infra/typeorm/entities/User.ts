@@ -11,19 +11,19 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'nome' })
+  @Column()
   name: string;
 
-  @Column({ name: 'email' })
+  @Column()
   email: string;
 
-  @Column({ name: 'tipo' })
+  @Column()
   registerType: number;
 
-  @Column({ name: 'nomeUsuario' })
+  @Column()
   username: string;
 
-  @Column({ name: 'senha' })
+  @Column()
   password: string;
 
   @CreateDateColumn()
