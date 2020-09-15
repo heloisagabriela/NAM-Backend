@@ -16,7 +16,7 @@ class FakeUsersRepository implements IUsersRepository {
     return findUser;
   }
 
-  public async findById(id: string): Promise<User | undefined> {
+  public async findById(id: number): Promise<User | undefined> {
     const findUser = this.users.find(user => user.id === id);
 
     return findUser;
