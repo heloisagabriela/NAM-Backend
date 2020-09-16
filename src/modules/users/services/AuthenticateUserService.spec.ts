@@ -25,7 +25,6 @@ describe('AuthenticateUsers', () => {
       authtenticateUser.execute({
         username: 'johDoe2',
         password: '123456',
-        registerType: 1,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -43,26 +42,7 @@ describe('AuthenticateUsers', () => {
       authtenticateUser.execute({
         username: 'johDoe2',
         password: 'wrongPassword',
-        registerType: 1,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
-});
-
-it('should not be able to authenticate with wrong password', async () => {
-  await createUser.execute({
-    name: 'John Doe',
-    email: 'johndoe222w@example.com',
-    username: 'johDoe22',
-    password: '123456',
-    registerType: 1,
-  });
-
-  await expect(
-    authtenticateUser.execute({
-      username: 'johDoe2',
-      password: '123456',
-      registerType: 999,
-    }),
-  ).rejects.toBeInstanceOf(AppError);
 });
