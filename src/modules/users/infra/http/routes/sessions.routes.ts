@@ -11,7 +11,6 @@ sessionsRouter.post(
     [Segments.BODY]: {
       username: Joi.string().required(),
       password: Joi.string().required(),
-      registerType: Joi.number().required(),
     },
   }),
   sessionController.create,

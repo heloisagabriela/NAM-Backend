@@ -9,7 +9,6 @@ import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 interface IRequest {
   username: string;
   password: string;
-  registerType: number;
 }
 interface IResponse {
   user: User;
@@ -24,11 +23,7 @@ class AuthenticateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({
-    username,
-    password,
-    registerType,
-  }: IRequest): Promise<IResponse> {
+  public async execute({ username, password }: IRequest): Promise<IResponse> {
     const user = await this.userRepository.findByUsername(username);
 
     if (!user) {
@@ -42,10 +37,6 @@ class AuthenticateUserService {
 
     if (!passwordMatched) {
       throw new AppError('Invalid Login', 401);
-    }
-
-    if (user.registerType !== registerType) {
-      throw new AppError('Registertype not matched', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
