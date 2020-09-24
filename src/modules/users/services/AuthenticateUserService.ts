@@ -7,7 +7,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
-  username: string;
+  email: string;
   password: string;
 }
 interface IResponse {
@@ -23,8 +23,8 @@ class AuthenticateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ username, password }: IRequest): Promise<IResponse> {
-    const user = await this.userRepository.findByUsername(username);
+  public async execute({ email, password }: IRequest): Promise<IResponse> {
+    const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Invalid Login', 401);

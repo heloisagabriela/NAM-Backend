@@ -23,7 +23,7 @@ describe('AuthenticateUsers', () => {
   it('should not be able to authenticate with non existing user', async () => {
     expect(
       authtenticateUser.execute({
-        username: 'johDoe2',
+        email: 'johDoe2@email.com',
         password: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -33,14 +33,13 @@ describe('AuthenticateUsers', () => {
     await createUser.execute({
       name: 'John Doe',
       email: 'johndoew@example.com',
-      username: 'johDoe2',
       password: '123456',
       registerType: 1,
     });
 
     await expect(
       authtenticateUser.execute({
-        username: 'johDoe2',
+        email: 'johndoew@example.com',
         password: 'wrongPassword',
       }),
     ).rejects.toBeInstanceOf(AppError);

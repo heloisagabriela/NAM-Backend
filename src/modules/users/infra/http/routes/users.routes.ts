@@ -11,7 +11,6 @@ usersRouter.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-      username: Joi.string().required(),
       password: Joi.string().min(6).required(),
       registerType: Joi.number().required(),
     },

@@ -10,12 +10,6 @@ import User from '@modules/users/infra/typeorm/entities/User';
 class FakeUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
-  public async findByUsername(username: string): Promise<User | undefined> {
-    const findUser = this.users.find(user => user.username === username);
-
-    return findUser;
-  }
-
   public async findByEmail(email: string): Promise<User | undefined> {
     const findUser = this.users.find(user => user.email === email);
 

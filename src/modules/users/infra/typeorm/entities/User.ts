@@ -23,9 +23,6 @@ class User {
   registerType: number;
 
   @Column()
-  username: string;
-
-  @Column()
   password: string;
 
   @CreateDateColumn()
