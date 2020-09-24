@@ -15,31 +15,31 @@ describe('CreateUsers', () => {
     createUser = new CreateUsersService(fakeUsersRepository, fakeHashProvider);
   });
   it('should be able to create a new user', async () => {
-    // const user = await createUser.execute({
-    //   name: 'John Due',
-    //   email: 'johndoew@example.com',
-    //   password: '123456',
-    // });
+    const user = await createUser.execute({
+      name: 'John Due',
+      email: 'johndoew@example.com',
+      password: '123456',
+      registerType: 1,
+    });
 
-    // expect(user).toHaveProperty('id');
-
-    expect(1 + 1).toBe(2);
+    expect(user).toHaveProperty('id');
   });
 
   it('should not be able to create a new user with the same email from anther one', async () => {
-    // await createUser.execute({
-    //   name: 'John Due',
-    //   email: 'johndoew@example.com',
-    //   password: '123456',
-    // });
+    await createUser.execute({
+      name: 'John Due',
+      email: 'johndoew@example.com',
+      password: '123456',
+      registerType: 1,
+    });
 
-    // await expect(
-    //   createUser.execute({
-    //     name: 'John Due',
-    //     email: 'johndoew@example.com',
-    //     password: '123456',
-    //   }),
-    // ).rejects.toBeInstanceOf(AppError);
-    expect(1 + 1).toBe(2);
+    await expect(
+      createUser.execute({
+        name: 'John Due',
+        email: 'johndoew@example.com',
+        password: '123456',
+        registerType: 1,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
