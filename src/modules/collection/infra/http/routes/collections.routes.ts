@@ -27,6 +27,6 @@ collectionRouter.post(
   collectionController.create,
 );
 
-collectionRouter.get('/search', collectionController.create);
+collectionRouter.get('/search', collectionController.search);
 
 export default collectionRouter;

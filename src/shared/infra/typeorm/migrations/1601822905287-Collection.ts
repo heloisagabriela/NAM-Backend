@@ -26,6 +26,11 @@ export default class Collection1601822905287 implements MigrationInterface {
             name: 'created_by',
             type: 'varchar',
           },
+          {
+            name: 'active',
+            type: 'int',
+            default: '1',
+          },
         ],
       }),
     );

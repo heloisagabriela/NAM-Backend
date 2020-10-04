@@ -22,17 +22,21 @@ class CreateCollectionService {
     collectionName,
     email,
   }: IRequest): Promise<Collection> {
-    // const userExist = await this.userRepository.findByEmail(email);
+    const userExist = await this.userRepository.findByEmail(email);
 
-    // if (!userExist) {
-    //   throw new AppError('User do not exists');
-    // } else {
-    const collection = await this.collectionRepository.create({
-      nomeDoAcervo: collectionName,
-      emailUsuario: email,
-    });
-    return collection;
-    // }
+    if (!userExist) {
+      throw new AppError('User do not exists');
+    } else {
+      const collection = await this.collectionRepository.create({
+        nomeDoAcervo: collectionName,
+        emailUsuario: email,
+      });
+      return collection;
+    }
+  }
+
+  public async search(): Promise<Collection[]> {
+    return this.collectionRepository.search();
   }
 }
 

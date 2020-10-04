@@ -7,11 +7,19 @@ export default class CollectionController {
     const collectionService = container.resolve(CreateCollectionService);
     const { collectionName, email } = request.body;
 
-    const collection = await  collectionService.execute({
+    const collection = await collectionService.execute({
       collectionName,
-      email
+      email,
     });
 
     return response.json(collection);
+  }
+
+  async search(response: Response): Promise<Response> {
+    const collectionService = container.resolve(CreateCollectionService);
+
+    const collections = await collectionService.search();
+
+    return response.json(collections);
   }
 }
