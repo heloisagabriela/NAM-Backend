@@ -1,4 +1,3 @@
-import { date } from '@hapi/joi';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
@@ -15,6 +14,7 @@ class CreateCollectionService {
   constructor(
     @inject('CollectionRepository')
     private collectionRepository: ICollectionRepository,
+    @inject('UsersRepository')
     private userRepository: IUsersRepository,
   ) {}
 
@@ -22,17 +22,17 @@ class CreateCollectionService {
     collectionName,
     email,
   }: IRequest): Promise<Collection> {
-    const userExist = await this.userRepository.findByEmail(email);
+    // const userExist = await this.userRepository.findByEmail(email);
 
-    if (!userExist) {
-      throw new AppError('User do not exists');
-    } else {
-      const collection = await this.collectionRepository.create({
-        name: collectionName,
-        created_by: email,
-      });
-      return collection;
-    }
+    // if (!userExist) {
+    //   throw new AppError('User do not exists');
+    // } else {
+    const collection = await this.collectionRepository.create({
+      nomeDoAcervo: collectionName,
+      emailUsuario: email,
+    });
+    return collection;
+    // }
   }
 }
 

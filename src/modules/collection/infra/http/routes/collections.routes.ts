@@ -6,7 +6,7 @@ const collectionController = new CollectionController();
 const collectionRouter = Router();
 
 collectionRouter.post(
-  'create/',
+  '/create',
   celebrate({
     [Segments.BODY]: {
       collectionName: Joi.string().required(),
@@ -17,7 +17,7 @@ collectionRouter.post(
 );
 
 collectionRouter.post(
-  'delete/',
+  '/delete',
   celebrate({
     [Segments.BODY]: {
       id: Joi.number().required(),
@@ -27,6 +27,6 @@ collectionRouter.post(
   collectionController.create,
 );
 
-collectionRouter.get('search/', collectionController.create);
+collectionRouter.get('/search', collectionController.create);
 
 export default collectionRouter;

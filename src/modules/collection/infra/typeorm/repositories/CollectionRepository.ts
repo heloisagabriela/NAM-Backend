@@ -14,9 +14,12 @@ class CollectionRepository implements ICollectionRepository {
   public async create(
     collectionData: ICreateCollectionDTO,
   ): Promise<Collection> {
-    const collection = this.ormRepository.create(collectionData);
+    const collection = this.ormRepository.create({
+      name: collectionData.nomeDoAcervo,
+      created_by: collectionData.emailUsuario,
+    });
 
-    await this.ormRepository.save(collectionData);
+    await this.ormRepository.save(collection);
     return collection;
   }
 }
