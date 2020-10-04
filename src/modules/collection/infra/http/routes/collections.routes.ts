@@ -17,19 +17,16 @@ collectionRouter.post(
 );
 
 collectionRouter.post(
-    'delete/',
-    celebrate({
-      [Segments.BODY]: {
-        id: Joi.number().required(),
-        email: Joi.string().email().required(),
-      },
-    }),
-    collectionController.create,
-  );
-
-collectionRouter.get(
-'search/',
-collectionController.create,
+  'delete/',
+  celebrate({
+    [Segments.BODY]: {
+      id: Joi.number().required(),
+      email: Joi.string().email().required(),
+    },
+  }),
+  collectionController.create,
 );
+
+collectionRouter.get('search/', collectionController.create);
 
 export default collectionRouter;

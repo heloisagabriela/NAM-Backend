@@ -1,4 +1,4 @@
 export default interface ICreateCollectionDTO {
-    nomeDoAcervo: string
-    emailUsuario: string   
-  }
+  nomeDoAcervo: string;
+  emailUsuario: string;
+}
