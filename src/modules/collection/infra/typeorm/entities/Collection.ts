@@ -8,12 +8,14 @@ import {
 
 @Entity('collection')
 class Collection {
-  @PrimaryGeneratedColumn('increment')
-  @Generated()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
+
+  @Column()
+  active: number;
 
   @Column()
   created_by: string;

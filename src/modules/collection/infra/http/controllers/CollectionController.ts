@@ -15,7 +15,7 @@ export default class CollectionController {
     return response.json(collection);
   }
 
-  async search(response: Response): Promise<Response> {
+  async search(_:Request, response: Response): Promise<Response> {
     const collectionService = container.resolve(CreateCollectionService);
 
     const collections = await collectionService.search();
