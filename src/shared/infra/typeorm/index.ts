@@ -1,5 +1,14 @@
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
-createConnection().then(() => {
-  console.log('🌏 Database Started');
-});
+class CreateConnectionClass {
+  public connection: Connection;
+
+  public async getConnection(): Promise<Connection> {
+    this.connection = await createConnection();
+    return this.connection;
+  }
+}
+
+const connection = new CreateConnectionClass();
+
+export default connection;
