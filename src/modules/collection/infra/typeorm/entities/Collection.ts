@@ -3,7 +3,6 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  Generated,
 } from 'typeorm';
 
 @Entity('collection')
