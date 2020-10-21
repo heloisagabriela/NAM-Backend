@@ -18,6 +18,7 @@ class CollectionRepository implements ICollectionRepository {
       name: collectionData.nomeDoAcervo,
       created_by: collectionData.emailUsuario,
       cover_image: collectionData.cover_image,
+      about: collectionData.about,
     });
 
     await this.ormRepository.save(collection);
