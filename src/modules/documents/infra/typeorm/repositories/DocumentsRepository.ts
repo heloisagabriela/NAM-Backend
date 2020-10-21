@@ -87,5 +87,13 @@ class DocumentsRepository {
 
     return documentTableStructure;
   }
+
+  public async getAllDocumentData(): Promise<object | undefined> {
+    const document = await this.entityManager.query(
+      `SELECT * FROM public."${this.tableName}"`,
+    );
+
+    return document;
+  }
 }
 export default DocumentsRepository;

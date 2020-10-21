@@ -14,4 +14,6 @@ documentsRouter.post('/structure/', documentsSchemaController.create);
 
 documentsRouter.post('/data/:collectionId', documentsDataController.create);
 
+documentsRouter.get('/data/:collectionId', documentsDataController.index);
+
 export default documentsRouter;

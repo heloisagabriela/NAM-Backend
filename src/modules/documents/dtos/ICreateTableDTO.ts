@@ -1,6 +1,6 @@
 interface ITableParams {
   name: string;
-  type: 'varchar';
+  type: 'varchar' | 'text';
 }
 export interface ITableProps {
   tableColumns: ITableParams[];

@@ -6,7 +6,7 @@ const collectionController = new CollectionController();
 const collectionRouter = Router();
 
 collectionRouter.post(
-  '/create',
+  '/',
   celebrate({
     [Segments.BODY]: {
       collectionName: Joi.string().required(),
@@ -17,7 +17,7 @@ collectionRouter.post(
 );
 
 collectionRouter.post(
-  '/delete',
+  '/',
   celebrate({
     [Segments.BODY]: {
       id: Joi.number().required(),
