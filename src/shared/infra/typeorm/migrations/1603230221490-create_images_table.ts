@@ -21,6 +21,7 @@ export default class CreateImagesTable1603230221490
           {
             name: 'document_id',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',

@@ -7,6 +7,8 @@ import ICollectionRepository from '../repositories/ICollectionRepository';
 interface IRequest {
   collectionName: string;
   email: string;
+  about: string;
+  cover_image: string;
 }
 
 @injectable()
@@ -21,6 +23,8 @@ class CreateCollectionService {
   public async execute({
     collectionName,
     email,
+    about,
+    cover_image,
   }: IRequest): Promise<Collection> {
     const userExist = await this.userRepository.findByEmail(email);
 
@@ -30,6 +34,8 @@ class CreateCollectionService {
       const collection = await this.collectionRepository.create({
         nomeDoAcervo: collectionName,
         emailUsuario: email,
+        about,
+        cover_image,
       });
       return collection;
     }

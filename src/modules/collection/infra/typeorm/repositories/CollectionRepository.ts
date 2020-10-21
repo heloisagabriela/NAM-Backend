@@ -17,6 +17,7 @@ class CollectionRepository implements ICollectionRepository {
     const collection = this.ormRepository.create({
       name: collectionData.nomeDoAcervo,
       created_by: collectionData.emailUsuario,
+      cover_image: collectionData.cover_image,
     });
 
     await this.ormRepository.save(collection);
