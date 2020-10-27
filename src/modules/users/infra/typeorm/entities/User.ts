@@ -7,6 +7,8 @@ import {
   Generated,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
+
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('increment')
@@ -23,6 +25,7 @@ class User {
   registerType: number;
 
   @Column()
+  @Exclude()
   password: string;
 
   @CreateDateColumn()

@@ -1,6 +1,7 @@
 import CreateCollectionService from '@modules/collection/service/CreateCollectionService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 export default class CollectionController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -22,6 +23,15 @@ export default class CollectionController {
 
     const collections = await collectionService.search();
 
-    return response.json(collections);
+    return response.json(classToClass(collections));
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const collectionService = container.resolve(CreateCollectionService);
+
+    const collection = await collectionService.getById({ id });
+
+    return response.json(classToClass(collection));
   }
 }

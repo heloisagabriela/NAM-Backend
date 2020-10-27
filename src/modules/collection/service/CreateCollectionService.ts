@@ -11,6 +11,9 @@ interface IRequest {
   cover_image: string;
 }
 
+interface IRequestGetById {
+  id: string;
+}
 @injectable()
 class CreateCollectionService {
   constructor(
@@ -43,6 +46,18 @@ class CreateCollectionService {
 
   public async search(): Promise<Collection[]> {
     return this.collectionRepository.search();
+  }
+
+  public async getById({
+    id,
+  }: IRequestGetById): Promise<Collection | undefined> {
+    const collection = await this.collectionRepository.getById(id);
+
+    if (!collection?.active) {
+      throw new AppError('The Collection is inative');
+    }
+
+    return collection;
   }
 }
 

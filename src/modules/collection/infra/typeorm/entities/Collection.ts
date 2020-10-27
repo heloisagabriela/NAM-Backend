@@ -3,8 +3,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  AfterInsert,
 } from 'typeorm';
+import { Expose } from 'class-transformer';
 
 @Entity('collection')
 class Collection {
@@ -29,9 +29,11 @@ class Collection {
   @CreateDateColumn()
   created_at: Date;
 
-  @AfterInsert()
-  modifyPath(): void {
-    this.cover_image = `${process.env.APP_URL}/images/${this.cover_image}`;
+  @Expose({ name: 'cover_image_url' })
+  getCoverImageUrl(): string | null {
+    return this.cover_image
+      ? `${process.env.APP_URL}/images/${this.cover_image}`
+      : null;
   }
 }
 export default Collection;

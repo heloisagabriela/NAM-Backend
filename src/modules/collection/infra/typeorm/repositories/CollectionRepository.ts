@@ -30,5 +30,11 @@ class CollectionRepository implements ICollectionRepository {
 
     return collections;
   }
+
+  public async getById(id: string): Promise<Collection | undefined> {
+    const collection = this.ormRepository.findOne(id);
+
+    return collection;
+  }
 }
 export default CollectionRepository;
