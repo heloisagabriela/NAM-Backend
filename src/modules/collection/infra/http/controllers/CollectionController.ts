@@ -22,7 +22,6 @@ export default class CollectionController {
     const collectionService = container.resolve(CreateCollectionService);
 
     const collections = await collectionService.search();
-
     return response.json(classToClass(collections));
   }
 

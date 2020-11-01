@@ -27,7 +27,6 @@ class CollectionRepository implements ICollectionRepository {
 
   public async search(): Promise<Collection[]> {
     const collections = this.ormRepository.find({ where: { active: 1 } });
-
     return collections;
   }
 

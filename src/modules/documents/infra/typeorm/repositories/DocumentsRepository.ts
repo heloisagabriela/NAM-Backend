@@ -53,6 +53,8 @@ class DocumentsRepository {
         ],
       }),
     );
+
+    await this.queryRunner.release();
     return {
       status: 200,
       message: this.tableName,
@@ -71,6 +73,8 @@ class DocumentsRepository {
       return data;
     } catch {
       throw new AppError('Ocorred an Error While inserting document data');
+    } finally {
+      await this.entityManager.release();
     }
   }
 
@@ -85,6 +89,7 @@ class DocumentsRepository {
           table_name = '${this.tableName}';
       `);
 
+    await this.entityManager.release();
     return documentTableStructure;
   }
 
@@ -93,6 +98,7 @@ class DocumentsRepository {
       `SELECT * FROM public."${this.tableName}"`,
     );
 
+    await this.entityManager.release();
     return document;
   }
 }

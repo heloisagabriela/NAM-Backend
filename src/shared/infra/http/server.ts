@@ -39,6 +39,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-app.listen(3333, () => {
-  console.log('🪐 Server Started on 3333');
+app.listen(3334, () => {
+  console.log('🪐 Server Started on 3334');
 });
