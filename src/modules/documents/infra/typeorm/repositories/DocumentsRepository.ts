@@ -8,6 +8,15 @@ export interface ICreateTableResponse {
   message: string;
 }
 
+export interface IDocumentObj {
+  id: string;
+}
+
+interface DocumentTableStructure {
+  column_name: string;
+  data_type: string;
+}
+
 class DocumentsRepository {
   private queryRunner: QueryRunner;
 
@@ -78,7 +87,29 @@ class DocumentsRepository {
     }
   }
 
-  public async getDocumentTableStructure(): Promise<object | undefined> {
+  public async update(data: IDocumentObj): Promise<object> {
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+
+    const keyValue = keys.map((key, i) => {
+      return `${key} = '${values[i]}'`;
+    });
+
+    try {
+      const query = `UPDATE "${this.tableName}" SET ${keyValue} WHERE id = '${data.id}'  `;
+
+      await this.entityManager.query(query);
+      return data;
+    } catch {
+      throw new AppError('Ocorred an Error While inserting document data');
+    } finally {
+      await this.entityManager.release();
+    }
+  }
+
+  public async getDocumentTableStructure(): Promise<
+    DocumentTableStructure[] | undefined
+  > {
     const documentTableStructure = await this.entityManager.query(`
       SELECT
           column_name,

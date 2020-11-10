@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import ensureAuthenticated from '@modules/users/infra/midddlewares/ensureAuthenticated';
+import multer from 'multer';
+import uploadConfig from '@config/upload';
 import DocumentsDataController from '../controllers/DocumentDataController';
 // import { celebrate, Segments, Joi } from 'celebrate';
 import DocumentsSchemaController from '../controllers/DocumentsSchemasController';
@@ -10,6 +12,8 @@ const documentsSchemaController = new DocumentsSchemaController();
 const documentsDataController = new DocumentsDataController();
 const excelDataController = new ExcelDataController();
 const excelSchemaController = new ExcelSchemaController();
+const upload = multer(uploadConfig);
+
 const documentsRouter = Router();
 
 documentsRouter.get(
@@ -41,6 +45,18 @@ documentsRouter.get(
   documentsDataController.index,
 );
 
+documentsRouter.put(
+  '/data/:collectionId',
+  ensureAuthenticated,
+  documentsDataController.update,
+);
+
 documentsRouter.get('/data/excel/:collectionId', excelDataController.show);
 
+documentsRouter.post(
+  '/data/excel/:collectionId',
+  ensureAuthenticated,
+  upload.single('file'),
+  excelDataController.store,
+);
 export default documentsRouter;

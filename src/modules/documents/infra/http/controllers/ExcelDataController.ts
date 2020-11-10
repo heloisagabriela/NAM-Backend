@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 /* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable func-names */
@@ -6,6 +8,7 @@
 import CreateCollectionService from '@modules/collection/service/CreateCollectionService';
 import GetDocumentDataService from '@modules/documents/services/GetDocumentDataService';
 import GetDocumentSchemaService from '@modules/documents/services/GetDocumentSchemaService';
+import ImportExcelDataService from '@modules/documents/services/ImportExcelDataService';
 import excel from 'exceljs';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
@@ -76,5 +79,15 @@ export default class ExcelDataController {
     return workbook.xlsx.write(response).then(function () {
       response.status(200).end();
     });
+  }
+
+  async store(request: Request, response: Response) {
+    const { collectionId } = request.params;
+
+    const file = request.file as Express.Multer.File;
+    const importExcelDataService = container.resolve(ImportExcelDataService);
+
+    const excelData = importExcelDataService.execute(file, collectionId);
+    return response.json(excelData);
   }
 }
