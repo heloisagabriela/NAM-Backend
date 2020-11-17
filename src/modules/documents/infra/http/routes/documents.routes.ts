@@ -45,6 +45,11 @@ documentsRouter.get(
   documentsDataController.index,
 );
 
+documentsRouter.get(
+  '/data/:collectionId/doc',
+  ensureAuthenticated,
+  documentsDataController.show,
+);
 documentsRouter.put(
   '/data/:collectionId',
   ensureAuthenticated,

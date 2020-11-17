@@ -12,7 +12,7 @@ export interface IDocumentObj {
   id: string;
 }
 
-interface DocumentTableStructure {
+interface IDocumentTableStructure {
   column_name: string;
   data_type: string;
 }
@@ -108,7 +108,7 @@ class DocumentsRepository {
   }
 
   public async getDocumentTableStructure(): Promise<
-    DocumentTableStructure[] | undefined
+    IDocumentTableStructure[] | undefined
   > {
     const documentTableStructure = await this.entityManager.query(`
       SELECT
@@ -127,6 +127,17 @@ class DocumentsRepository {
   public async getAllDocumentData(): Promise<object | undefined> {
     const document = await this.entityManager.query(
       `SELECT * FROM public."${this.tableName}"`,
+    );
+
+    await this.entityManager.release();
+    return document;
+  }
+
+  public async getOneDocumentData(
+    documentId: string,
+  ): Promise<object | undefined> {
+    const document = await this.entityManager.query(
+      `SELECT * FROM public."${this.tableName}" WHERE id = '${documentId}'`,
     );
 
     await this.entityManager.release();

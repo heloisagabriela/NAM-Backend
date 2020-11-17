@@ -51,7 +51,9 @@ export default class ExcelDataController {
           width: 25,
         };
       })
-      .filter(schema => schema.key !== 'id');
+      .filter(schema => schema.key !== 'id')
+      .filter(schema => schema.key !== 'created_at')
+      .filter(schema => schema.key !== 'updated_at');
 
     const workbook = new excel.Workbook() as any;
     const worksheet = workbook.addWorksheet('Documentos');

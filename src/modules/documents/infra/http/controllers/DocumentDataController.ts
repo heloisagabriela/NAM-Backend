@@ -1,5 +1,6 @@
 import CreateDocumentDataService from '@modules/documents/services/CreateDocumentDataService';
 import GetDocumentDataService from '@modules/documents/services/GetDocumentDataService';
+import GetOneDocumentDataService from '@modules/documents/services/GetOneDocumentDataService';
 import UpdateDocumentDataService from '@modules/documents/services/UpdateDocumentDataService';
 
 import { Request, Response } from 'express';
@@ -38,5 +39,18 @@ export default class DocumentsDataController {
     const newDocument = await updateDocumentDataService.execute(data);
 
     return response.json(newDocument);
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const { collectionId } = request.params;
+    const { documentId } = request.query;
+
+    const getDocumentDataService = new GetOneDocumentDataService(collectionId);
+
+    const documentsData = await getDocumentDataService.execute(
+      documentId as string,
+    );
+
+    return response.json(documentsData);
   }
 }
